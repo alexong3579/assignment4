@@ -86,6 +86,25 @@ No passwords, tokens or API keys are committed. The only hit when I searched the
 
 ---
 
+## Stretch goal: versioned Docker images (Option 4)
+
+The images are on Docker Hub: https://hub.docker.com/r/alexong35/taskflow-api
+
+I tag them with semantic versioning (MAJOR.MINOR.PATCH) and the git commit SHA. The CI pipeline does the tagging, so I never tag by hand.
+
+| Tag | Where it comes from |
+| :--- | :--- |
+| `1.0.0`, `1.0.1` | Pushing a git tag like `v1.0.1` |
+| `1.0` | The same git tag, and it moves to the newest patch release |
+| `4bcc31f`, `857eedc`, ... | The short commit SHA of the commit that was built |
+| `latest` | Every push to `main` |
+
+Right now two versions are published. `1.0.0` was built from the Tomcat security fix (`857eedc`), and `1.0.1` was built from the commit after the README rewrite (`4bcc31f`), which is also what `latest` points at. To release a new version I run `git tag -a v1.0.2 -m "v1.0.2"` and `git push origin v1.0.2`, and the pipeline does the rest.
+
+Docker Hub tags screenshot: *(add `screenshots/dockerhub-tags.png` here)*
+
+---
+
 ## Architecture & Containerization
 
 ### Multi-Stage Dockerfile
