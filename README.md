@@ -99,9 +99,11 @@ I tag them with semantic versioning (MAJOR.MINOR.PATCH) and the git commit SHA. 
 | `4bcc31f`, `857eedc`, ... | The short commit SHA of the commit that was built |
 | `latest` | Every push to `main` |
 
-Right now two versions are published. `1.0.0` was built from the Tomcat security fix (`857eedc`), and `1.0.1` was built from the commit after the README rewrite (`4bcc31f`), which is also what `latest` points at. To release a new version I run `git tag -a v1.0.2 -m "v1.0.2"` and `git push origin v1.0.2`, and the pipeline does the rest.
+Right now two versions are published. `1.0.0` was built from the Tomcat security fix (`857eedc`), and `1.0.1` was built from the commit after the README rewrite (`4bcc31f`). `latest` follows `main`, so it moves forward with every push and can be a few commits ahead of `1.0.1`, as the different digest in the screenshot shows. To release a new version I run `git tag -a v1.0.2 -m "v1.0.2"` and `git push origin v1.0.2`, and the pipeline does the rest.
 
-Docker Hub tags screenshot: *(add `screenshots/dockerhub-tags.png` here)*
+Docker Hub tags:
+
+![Docker Hub tags](screenshots/dockerhub-tags.png)
 
 ---
 
