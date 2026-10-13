@@ -17,13 +17,12 @@ https://assignment4-production-6a4a.up.railway.app/api/tasks
 
 #### 1. Railway Dashboard
 Deployment status and active service overview on Railway:
+![alt text](dashboard.png)
 
-![Railway Dashboard](screenshots/dashboard.png)
 
 #### 2. Live Application
 API endpoint response verifying that the deployed service is active and handling requests:
-
-![Live Application](screenshots/application.png)
+![alt text](application.png)
 
 ---
 
