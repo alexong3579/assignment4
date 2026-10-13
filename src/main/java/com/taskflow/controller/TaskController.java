@@ -1,6 +1,7 @@
 package com.taskflow.controller;
 
 import com.taskflow.entity.Task;
+import jakarta.validation.Valid;
 import com.taskflow.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,7 +29,7 @@ public class TaskController {
     }
 
     @PostMapping
-    public ResponseEntity<Task> createTask(@RequestBody Task task) {
+    public ResponseEntity<Task> createTask(@Valid @RequestBody Task task) {
         Task createdTask = taskService.createTask(task);
         return new ResponseEntity<>(createdTask, HttpStatus.CREATED);
     }

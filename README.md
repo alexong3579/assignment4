@@ -10,9 +10,8 @@ TaskFlow API is a RESTful task management service built with **Spring Boot** and
 The API is deployed and accessible at:
 
 ```
-https://your-app-name.up.railway.app/api/tasks
+https://assignment4-production-6a4a.up.railway.app/api/tasks
 ```
-*(Update this URL with your active Railway deployment link)*
 
 ### Deployment Screenshots
 
@@ -62,6 +61,9 @@ To ensure a minimal image footprint and clean separation of concerns, the projec
 # Linux / macOS / WSL
 ./mvnw spring-boot:run
 
+# Run the tests
+./mvnw test
+
 # Windows CMD / PowerShell
 mvnw.cmd spring-boot:run
 ```
@@ -83,8 +85,8 @@ docker run -p 8080:8080 taskflow-api
 | Method | Endpoint | Description | Request Body | Response |
 | :--- | :--- | :--- | :--- | :--- |
 | `GET` | `/api/tasks` | Get all tasks | None | `200 OK` |
-| `GET` | `/api/tasks/{id}` | Get task by ID | None | `200 OK` |
-| `POST` | `/api/tasks` | Create a new task | Task JSON | `201 Created` |
+| `GET` | `/api/tasks/{id}` | Get task by ID | None | `200 OK`, or `404` if not found |
+| `POST` | `/api/tasks` | Create a new task | Task JSON (`title` required) | `201 Created`, or `400` if invalid |
 
 ### Sample Payload (POST `/api/tasks`)
 ```json
