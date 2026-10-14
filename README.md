@@ -30,7 +30,7 @@ API endpoint response verifying that the deployed service is active and handling
 
 ### Deployment Status
 - **Tasks Completed:** Multi-stage Docker containerization, local container testing, GitHub integration, and Railway cloud deployment.
-- **Errors / Issues:** None.
+- **Errors / Issues:** The deployment itself went through without errors. Along the way I fixed a few problems in the API (a missing task returned a 500 instead of a 404, and there was no input validation), and the first dependency scan failed on a vulnerable Tomcat version. All of these are fixed. The scan details are in the security section below.
 
 ### Stretch Goals (Optional)
 - **Selection:** Option 1 (CI pipeline), Option 4 (versioned Docker images) and Option 5 (security checks)
