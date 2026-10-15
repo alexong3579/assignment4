@@ -82,7 +82,7 @@ No passwords, tokens or API keys are committed. The only hit when I searched the
 - The build only fails at CVSS 9.0 and above. Lower-scoring findings still show up in the report, they just don't stop the build.
 - I turned off the Sonatype OSS Index analyzer because it now needs credentials, so the scan only uses NVD data.
 - I didn't scan the Docker image itself, only the dependencies. A tool like Trivy would be the next step.
-- The H2 console is enabled (`spring.h2.console.enabled=true`), which means it can be reached on the public Railway URL. That's fine for a demo with no real data, but I would turn it off in a real deployment.
+- The H2 console is now off by default (`H2_CONSOLE=false`), so it is not reachable on the public Railway URL. Set `H2_CONSOLE=true` to use it locally.
 
 ---
 
@@ -181,7 +181,7 @@ curl -X POST http://localhost:8080/api/tasks \
 ---
 
 ## Database Console (H2)
-The in-memory H2 database console is enabled for local inspection at:
+The in-memory H2 database console is disabled by default. Start the app with `H2_CONSOLE=true` to inspect it locally at:
 - **URL:** `http://localhost:8080/h2-console`
 - **JDBC URL:** `jdbc:h2:mem:taskflowdb`
 - **Username:** `sa`

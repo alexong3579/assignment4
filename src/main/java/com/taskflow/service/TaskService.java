@@ -3,15 +3,15 @@ package com.taskflow.service;
 import com.taskflow.entity.Task;
 import com.taskflow.exception.TaskNotFoundException;
 import com.taskflow.repository.TaskRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class TaskService {
 
-    @Autowired
-    private TaskRepository taskRepository;
+    private final TaskRepository taskRepository;
 
     public List<Task> findAllTasks() {
         return taskRepository.findAll();
