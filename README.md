@@ -109,6 +109,33 @@ Docker Hub tags:
 
 ## Architecture & Containerization
 
+### Build and Deploy Pipeline
+Every push to `main` triggers two independent pipelines: GitHub Actions (test, scan, publish to Docker Hub) and Railway (build the `Dockerfile` and deploy).
+
+```mermaid
+flowchart LR
+    Dev([Developer]) -->|git push main| GH[GitHub repo]
+
+    subgraph CI [GitHub Actions CI]
+        direction TB
+        T[test: mvnw verify] --> D[docker: build and push]
+        S[security-scan: OWASP Dependency-Check] --> D
+    end
+
+    GH --> T
+    GH --> S
+    D -->|latest, vX.Y.Z, commit SHA| DH[(Docker Hub: taskflow-api)]
+
+    subgraph RW [Railway]
+        direction TB
+        B[Build Dockerfile: Maven stage then JRE stage] --> R[Run container on port 8080]
+    end
+
+    GH -->|auto deploy on push| B
+    R --> URL{{Public URL: /api/tasks}}
+    Client([Client: curl or browser]) -->|HTTPS| URL
+```
+
 ### Multi-Stage Dockerfile
 To ensure a minimal image footprint and clean separation of concerns, the project uses a two-stage Docker build:
 
