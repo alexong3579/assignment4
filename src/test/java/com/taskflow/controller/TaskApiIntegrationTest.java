@@ -37,6 +37,14 @@ class TaskApiIntegrationTest {
     }
 
     @Test
+    void startupSeedsSampleTasks() throws Exception {
+        mvc.perform(get("/api/tasks")).andExpect(status().isOk())
+                .andExpect(jsonPath("$[?(@.title=='Set up Docker')]").exists())
+                .andExpect(jsonPath("$[?(@.title=='Deploy to Railway')]").exists())
+                .andExpect(jsonPath("$[?(@.title=='Submit Assignment 4')]").exists());
+    }
+
+    @Test
     void missingTaskReturns404() throws Exception {
         mvc.perform(get("/api/tasks/987654")).andExpect(status().isNotFound())
                 .andExpect(jsonPath("$.message").value("Task not found with id: 987654"));

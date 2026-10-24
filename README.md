@@ -42,7 +42,7 @@ API endpoint response verifying that the deployed service is active and handling
 
 I added a GitHub Actions workflow that runs on every push to `main` and on version tags. It has three jobs:
 
-1. `test` runs `./mvnw verify`, which covers 10 unit and integration tests.
+1. `test` runs `./mvnw verify`, which covers 13 unit and integration tests.
 2. `security-scan` runs OWASP Dependency-Check and fails the build if any vulnerability scores 9.0 or higher on CVSS.
 3. `docker` builds the image and pushes it to Docker Hub, but only if the first two jobs pass.
 
@@ -182,6 +182,8 @@ docker run -p 8080:8080 taskflow-api
 | `GET` | `/api/tasks` | Get all tasks | None | `200 OK` |
 | `GET` | `/api/tasks/{id}` | Get task by ID | None | `200 OK`, or `404` if not found |
 | `POST` | `/api/tasks` | Create a new task | Task JSON (`title` required) | `201 Created`, or `400` if invalid |
+
+On startup the app seeds three sample tasks, but only if the table is empty. The database is in memory, so this keeps the live URL from returning an empty list after every redeploy.
 
 ### Sample Payload (POST `/api/tasks`)
 ```json
